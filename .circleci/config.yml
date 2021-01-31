@@ -1,3 +1,4 @@
+version: 2.1
 build_workflow: &build_workflow
   context: org-global
   filters:
@@ -84,4 +85,3 @@ workflows:
           <<: *build_workflow
       - linux_gcc_singlethread:
           <<: *build_workflow
-

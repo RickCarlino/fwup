@@ -45,10 +45,10 @@ if [[ "$CIRCLE_OS_NAME" = "linux" ]]; then
             update-binfmts --import /usr/share/binfmts/wine
             ;;
         singlethread|dynamic|minimal)
-            apt-get install -qq libarchive-dev python3-pip python3-dev
+            apt-get install -qq libarchive-dev python-pip python-dev
             install_confuse
-            pip3 install --upgrade pip3
-            pip3 install --user cpp-coveralls
+            pip install --upgrade pip
+            pip install --user cpp-coveralls
             ;;
         static)
             # Need fpm when building static so that we can make the .deb and .rpm packages

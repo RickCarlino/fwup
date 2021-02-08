@@ -56,7 +56,7 @@ if [[ "$CIRCLE_OS_NAME" = "linux" ]]; then
             gem install fpm --no-ri --no-rdoc
             ;;
         raspberrypi)
-            apt-get install -qq libarchive-dev qemu binfmt-support qemu-user-static
+            apt-get install -qq libarchive-dev qemu binfmt-support qemu-user-static rpm rubygems ruby-dev
             gem install fpm --no-ri --no-rdoc
             pushd ~
             git clone https://github.com/raspberrypi/tools.git --depth 1

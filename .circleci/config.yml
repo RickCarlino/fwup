@@ -93,6 +93,12 @@ jobs:
       CIRCLE_OS_NAME: linux
       MODE: singlethread
     <<: *build
+  linux_gcc_minimal:
+    <<: *defaults
+    environment:
+      CIRCLE_OS_NAME: linux
+      MODE: minimal
+    <<: *build
   osx_clang_dynamic:
     <<: *defaults_osx
     environment:
@@ -119,6 +125,8 @@ workflows:
       - linux_gcc_raspberrypi:
           <<: *build_workflow
       - linux_gcc_singlethread:
+          <<: *build_workflow
+      - linux_gcc_minimal:
           <<: *build_workflow
       - osx_clang_dynamic:
           <<: *build_workflow

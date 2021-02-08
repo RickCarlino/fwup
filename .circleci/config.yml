@@ -80,6 +80,7 @@ jobs:
     environment:
       CIRCLE_OS_NAME: linux
       MODE: windows
+      DEBIAN_FRONTEND: noninteractive
       TZ: "America/New_York"
     <<: *build
   linux_gcc_raspberrypi:

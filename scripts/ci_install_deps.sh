@@ -36,13 +36,12 @@ install_confuse() {
 
 if [[ "$CIRCLE_OS_NAME" = "linux" ]]; then
     apt-get update -qq
-    apt-get install -qq autopoint dosfstools mtools unzip zip help2man autoconf build-essential libtool curl pkg-config mtools unzip zip help2man ca-certificates xdelta3
+    apt-get install -qq autoconf autopoint build-essential ca-certificates curl dosfstools git help2man libtool mtools pkg-config unzip xdelta3 zip
     case $MODE in
         windows)
             dpkg --add-architecture i386
             apt-get update
-            apt-get install -qq gcc-mingw-w64-x86-64 wine wine-binfmt
-            update-binfmts --import /usr/share/binfmts/wine
+            apt-get install -qq gcc-mingw-w64-x86-64 wine
             ;;
         singlethread|dynamic|minimal)
             apt-get install -qq libarchive-dev python-pip python-dev
@@ -56,7 +55,7 @@ if [[ "$CIRCLE_OS_NAME" = "linux" ]]; then
             gem install fpm --no-ri --no-rdoc
             ;;
         raspberrypi)
-            apt-get install -qq libarchive-dev qemu binfmt-support qemu-user-static
+            apt-get install -qq binfmt-support libarchive-dev qemu qemu-user-static rpm ruby-dev rubygems
             gem install fpm --no-ri --no-rdoc
             pushd ~
             git clone https://github.com/raspberrypi/tools.git --depth 1

@@ -40,7 +40,7 @@ case "${CIRCLE_OS_NAME}-${MODE}" in
         ./configure --enable-gcov --without-pthreads
         ;;
     osx-dynamic)
-        PKG_CONFIG_PATH="/usr/local/opt/libarchive/lib/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH" ./configure;
+        PKG_CONFIG_PATH="$(brew --prefix libarchive)/lib/pkgconfig:$(brew --prefix)/lib/pkgconfig:$PKG_CONFIG_PATH" ./configure
         ;;
     linux-windows)
         CC=x86_64-w64-mingw32-gcc \
@@ -78,7 +78,7 @@ cd fwup-$FWUP_VERSION
 if [ "$CIRCLE_OS_NAME" = "linux" ]; then
     ./configure;
 else
-    PKG_CONFIG_PATH="/usr/local/opt/libarchive/lib/pkgconfig:/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH" ./configure;
+    PKG_CONFIG_PATH="$(brew --prefix libarchive)/lib/pkgconfig:$(brew --prefix)/lib/pkgconfig:$PKG_CONFIG_PATH" ./configure
 fi
 make -j4
 if ! make -j4 check; then

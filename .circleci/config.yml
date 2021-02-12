@@ -25,9 +25,9 @@ defaults_osx: &defaults_osx
 
 build: &build
   steps:
-    - run:
-        name: (Hack??) Update apt-get/install Git
-        command: apt-get update && apt-get install git --yes
+    # - run:
+    #     name: (Hack??) Update apt-get/install Git
+    #     command: apt-get update && apt-get install git --yes
     - checkout
     - restore_cache:
         key: dl-{{ .Branch }}
@@ -78,10 +78,13 @@ jobs:
       MODE: dynamic
     <<: *build
   linux_gcc_windows:
-    <<: *defaults
+    docker:
+      - image: ubuntu:20.04
     environment:
       CIRCLE_OS_NAME: linux
       MODE: windows
+      DEBIAN_FRONTEND: noninteractive
+      TZ: "America/New_York"
     <<: *build
   linux_gcc_raspberrypi:
     <<: *defaults
@@ -94,6 +97,12 @@ jobs:
     environment:
       CIRCLE_OS_NAME: linux
       MODE: singlethread
+    <<: *build
+  linux_gcc_minimal:
+    <<: *defaults
+    environment:
+      CIRCLE_OS_NAME: linux
+      MODE: minimal
     <<: *build
   osx_clang_dynamic:
     <<: *defaults_osx
@@ -122,8 +131,9 @@ workflows:
           <<: *build_workflow
       - linux_gcc_singlethread:
           <<: *build_workflow
+      - linux_gcc_minimal:
+          <<: *build_workflow
       - osx_clang_dynamic:
           <<: *build_workflow
       - osx_clang_static:
           <<: *build_workflow
-

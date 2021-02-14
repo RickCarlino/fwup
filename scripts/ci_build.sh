@@ -63,7 +63,7 @@ esac
 
 # Normal build
 make -j4
-if ! make -j4 check; then
+if ! make check; then
     cat tests/test-suite.log
     echo "git source 'make check' failed. See log above"
     exit 1
